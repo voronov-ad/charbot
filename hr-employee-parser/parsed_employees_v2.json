@@ -1,0 +1,943 @@
+[
+  {
+    "name": "",
+    "age": "34 года",
+    "date_of_birth": "1 мая 1987",
+    "address": "Москва",
+    "metro": "",
+    "position": "Руководитель отдела информационной безопасности / Архитектор ИБ",
+    "salary": "270 000 руб.",
+    "specialization": [
+      "компьютерная безопасность"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 12 лет 7 месяцев",
+    "last_work": "Начальник отдела анализа программного кода",
+    "work_place_count": "7",
+    "skills": [
+      "Аудит безопасности",
+      "Информационная безопасность",
+      "Внедрение систем информационной безопасности",
+      "Технические средства информационной защиты",
+      "Проектирование",
+      "Внутренний аудит информационных систем",
+      "sdlc",
+      "анализ программного кода",
+      "тестирование на проникновение",
+      "анализ защищенности приложений",
+      "Linux",
+      "TCP/IP",
+      "OWASP",
+      "Этичный хакинг"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B2 — Средне-продвинутый"
+    ],
+    "link": "https://hh.ru/resume/907708b30003b732df00000dc95054394c3039"
+  },
+  {
+    "name": "",
+    "age": "27 лет",
+    "date_of_birth": "13 августа 1994",
+    "address": "Пушкино (Московская область)",
+    "metro": "",
+    "position": "Менеджер по IT",
+    "salary": "",
+    "specialization": [
+      "экономическая и информационная безопасность"
+    ],
+    "specialization_category": "Безопасность",
+    "exprerience": "Опыт работы 5 лет 5 месяцев",
+    "last_work": "Инженер",
+    "work_place_count": "2",
+    "skills": [
+      "Информационная безопасность",
+      "Информационные технологии",
+      "Антивирусная защита сети",
+      "Технические средства информационной защиты",
+      "Пользователь ПК",
+      "Работа в команде",
+      "Ведение переговоров",
+      "Работа с большим объемом информации",
+      "Управление персоналом",
+      "Работа с оргтехникой",
+      "Деловая коммуникация"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний",
+      "Белорусский — A2 — Элементарный"
+    ],
+    "link": "https://hh.ru/resume/06e738e2000209e5b100000dc94e736a437068"
+  },
+  {
+    "name": "",
+    "age": "37 лет",
+    "date_of_birth": "15 мая 1984",
+    "address": "Абакан",
+    "metro": "",
+    "position": "Руководитель",
+    "salary": "150 000 руб.",
+    "specialization": [
+      "управление проектами"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 12 лет 11 месяцев",
+    "last_work": "Начальник строительного участка",
+    "work_place_count": "8",
+    "skills": [
+      "Исполнительность",
+      "Самомотивация",
+      "Ответственность",
+      "Осознанность",
+      "Адекватность"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной"
+    ],
+    "link": "https://hh.ru/resume/5d6a3a620008c3b54700000dc939364b483256"
+  },
+  {
+    "name": "",
+    "age": "22 года",
+    "date_of_birth": "22 марта 1999",
+    "address": "Москва",
+    "metro": "",
+    "position": "Data Scientist / Data Analyst",
+    "salary": "",
+    "specialization": [
+      "программирование",
+      "разработка",
+      "системы управления предприятием (erp)",
+      "аналитик"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 7 месяцев",
+    "last_work": "Младший аналитик",
+    "work_place_count": "3",
+    "skills": [
+      "Python",
+      "numpy",
+      "pandas",
+      "Machine Learning",
+      "sklearn",
+      "matplotlib",
+      "SQL",
+      "Git",
+      "Xgboost",
+      "Английский язык",
+      "Математическая статистика",
+      "Математический анализ",
+      "MS Excel",
+      "PowerBI"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B2 — Средне-продвинутый"
+    ],
+    "link": "https://hh.ru/resume/fd4ca1f90008fe650b00000dc94a4543343972"
+  },
+  {
+    "name": "",
+    "age": "",
+    "date_of_birth": "",
+    "address": "Казань",
+    "metro": "",
+    "position": "Junior Data Scientist",
+    "salary": "",
+    "specialization": [
+      "банковское по",
+      "начальный уровень",
+      "мало опыта",
+      "программирование",
+      "разработка"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 1 год 10 месяцев",
+    "last_work": "Инженер-программист Java",
+    "work_place_count": "2",
+    "skills": [
+      "Исполнительность",
+      "Аналитический склад ума",
+      "Усидчивость"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B2 — Средне-продвинутый",
+      "Немецкий — A2 — Элементарный"
+    ],
+    "link": "https://hh.ru/resume/9749a9d20008300afd00000dc93466344a6448"
+  },
+  {
+    "name": "",
+    "age": "34 года",
+    "date_of_birth": "18 января 1987",
+    "address": "Казань",
+    "metro": "м. Площадь Тукая",
+    "position": "Data scientist",
+    "salary": "",
+    "specialization": [
+      "программирование",
+      "разработка"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 10 лет 5 месяцев",
+    "last_work": "фриланс",
+    "work_place_count": "5",
+    "skills": [
+      "Исполнительность",
+      "Аналитический склад ума",
+      "SQL",
+      "Python",
+      "Big Data",
+      "Data Analysis",
+      "Git",
+      "C++"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний"
+    ],
+    "link": "https://hh.ru/resume/bae9fff9000917afb000000dc9526970446150"
+  },
+  {
+    "name": "",
+    "age": "22 года",
+    "date_of_birth": "24 сентября 1999",
+    "address": "Москва",
+    "metro": "",
+    "position": "Программист Python",
+    "salary": "80 000 руб.",
+    "specialization": [
+      "информационные технологии",
+      "интернет",
+      "мультимедиа",
+      "производство",
+      "технологии",
+      "финансы",
+      "банки",
+      "инвестиции"
+    ],
+    "specialization_category": "Начало карьеры, студенты",
+    "exprerience": "",
+    "last_work": "",
+    "work_place_count": "0",
+    "skills": [
+      "Python",
+      "C/C++",
+      "Cuda",
+      "C#",
+      "SQL",
+      "Git",
+      "pandas",
+      "scikit-learn",
+      "tensorflow",
+      "Matplotlib",
+      "Numpy",
+      "Linux",
+      "MS SQL"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B2 — Средне-продвинутый"
+    ],
+    "link": "https://hh.ru/resume/82ab5d5d000927803200000dc9385a3856624a"
+  },
+  {
+    "name": "",
+    "age": "23 года",
+    "date_of_birth": "20 ноября 1997",
+    "address": "Москва",
+    "metro": "м. Перово",
+    "position": "Data Science",
+    "salary": "",
+    "specialization": [
+      "медицина",
+      "фармацевтика",
+      "наука",
+      "образование",
+      "финансы",
+      "банки",
+      "инвестиции"
+    ],
+    "specialization_category": "Начало карьеры, студенты",
+    "exprerience": "Опыт работы 7 месяцев",
+    "last_work": "Аналитик 1С",
+    "work_place_count": "2",
+    "skills": [
+      "Математическая статистика",
+      "Математический анализ",
+      "Линейная алгебра",
+      "Теория вероятности",
+      "Оптимизация",
+      "Дискретная математика",
+      "Базы данных",
+      "SQL",
+      "Python",
+      "Pandas",
+      "Numpy",
+      "Matplotlib",
+      "Tensorflow",
+      "Computer vision",
+      "NLP",
+      "Machine Learning",
+      "Linear Regression",
+      "Logistic Regression",
+      "Neural Networks",
+      "SVM",
+      "Cluster Analysis",
+      "Random Forest",
+      "Power BI",
+      "Tableau",
+      "scikit-learn",
+      "Jupyter Notebook"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B2 — Средне-продвинутый"
+    ],
+    "link": "https://hh.ru/resume/07e3fc920008d9566700000dc9504e67744265"
+  },
+  {
+    "name": "",
+    "age": "34 года",
+    "date_of_birth": "31 января 1987",
+    "address": "Подольск (Московская область)",
+    "metro": "",
+    "position": "Data Scientist",
+    "salary": "90 000 руб.",
+    "specialization": [
+      "программирование",
+      "разработка",
+      "другое"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 11 лет 10 месяцев",
+    "last_work": "Инженер-исследователь",
+    "work_place_count": "3",
+    "skills": [
+      "Классические алгоритмы ML",
+      "Основы C++, Git, Bash, Docker, AWS, GCP",
+      "Основы статистики и линейной алгебры",
+      "Мат. анализ, теория вероятностей, численные методы, цифровая",
+      "Python, SQL, MatLab, C, Assembler",
+      "Hadoop, Hive, Spark, Airflow",
+      "DL: MLP, CNN, ResNet, fine-tuning, применение готовых SOTA моделей",
+      "numpy, pandas, matplotlib, beautifulsoup, scikit-learn, Keras",
+      "FastAPI"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний"
+    ],
+    "link": "https://hh.ru/resume/10f2db3300088be21200000dc9504a51536c43"
+  },
+  {
+    "name": "",
+    "age": "30 лет",
+    "date_of_birth": "1 февраля 1991",
+    "address": "Санкт-Петербург",
+    "metro": "м. Невский проспект",
+    "position": "Юрисконсульт",
+    "salary": "80 000 руб.",
+    "specialization": [
+      "банковское право",
+      "корпоративное право",
+      "юрисконсульт"
+    ],
+    "specialization_category": "Юристы",
+    "exprerience": "Опыт работы 12 лет 2 месяца",
+    "last_work": "Начальник отдела по работе с франшизами",
+    "work_place_count": "8",
+    "skills": [
+      "Опыт судебных разбирательств",
+      "Договорная работа",
+      "Составление исков",
+      "Составление договоров",
+      "Согласование договоров",
+      "Организаторские навыки",
+      "Управленческие навыки",
+      "Сопровождение сделок",
+      "Банковское право",
+      "Руководство коллективом"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — C2 — В совершенстве",
+      "Испанский — A2 — Элементарный"
+    ],
+    "link": "https://hh.ru/resume/92c0f75d000244696400000dc97a5450565067"
+  },
+  {
+    "name": "",
+    "age": "",
+    "date_of_birth": "",
+    "address": "Москва",
+    "metro": "м. Партизанская",
+    "position": "Data Scientist / Аналитик данных (Junior)",
+    "salary": "",
+    "specialization": [
+      "программирование",
+      "разработка",
+      "аналитик"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 21 год 10 месяцев",
+    "last_work": "Студент двухлетнего курса \"Data Scientist\"",
+    "work_place_count": "3",
+    "skills": [
+      "Python",
+      "Machine Learning",
+      "Data Scientist",
+      "Data Analysis",
+      "Neural Network",
+      "Data Science"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний"
+    ],
+    "link": "https://hh.ru/resume/165065690008e425f900000dc939453568384d"
+  },
+  {
+    "name": "",
+    "age": "22 года",
+    "date_of_birth": "1 июля 1999",
+    "address": "Москва",
+    "metro": "",
+    "position": "Data Scientist / ML developer",
+    "salary": "",
+    "specialization": [
+      "программирование",
+      "разработка"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 7 месяцев",
+    "last_work": "Developer in ML team",
+    "work_place_count": "2",
+    "skills": [
+      "Python",
+      "Java",
+      "С++ (base)",
+      "PyTorch",
+      "scikit-learn",
+      "NumPy",
+      "pandas",
+      "JUnit",
+      "Git",
+      "ООП"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний"
+    ],
+    "link": "https://hh.ru/resume/9b26e76c0009239d6a00000dc9766145596d64"
+  },
+  {
+    "name": "",
+    "age": "20 лет",
+    "date_of_birth": "21 июля 2001",
+    "address": "Зеленоград",
+    "metro": "",
+    "position": "Data Scientist (intern/junior)",
+    "salary": "",
+    "specialization": [
+      "программирование",
+      "разработка",
+      "аналитик"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 8 месяцев",
+    "last_work": "Data Scientist (обучение)",
+    "work_place_count": "2",
+    "skills": [
+      "A/B тестирование",
+      "Математическая статистика",
+      "полносвязные нейронные сети",
+      "Сверточные нейронные сети",
+      "лемматизация",
+      "градиентный бустинг",
+      "исследовательский анализ данных",
+      "SQL",
+      "PostgreSQL",
+      "кластеризация",
+      "поиск аномалий",
+      "TF-IDF",
+      "ресемплирование",
+      "Jupiter Notebook"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний"
+    ],
+    "link": "https://hh.ru/resume/21c4fadf00081e1cee00000dc9656758464f48"
+  },
+  {
+    "name": "",
+    "age": "32 года",
+    "date_of_birth": "22 марта 1989",
+    "address": "Калининград",
+    "metro": "",
+    "position": "Data Scientist",
+    "salary": "100 000 руб.",
+    "specialization": [
+      "программирование",
+      "разработка",
+      "аналитик"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 10 лет 8 месяцев",
+    "last_work": "Аналитик программы лояльности и интернет-магазина",
+    "work_place_count": "7",
+    "skills": [
+      "Математическое моделирование",
+      "Python",
+      "SQL",
+      "MS Excel",
+      "DWH",
+      "BI",
+      "Machine Learning"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний"
+    ],
+    "link": "https://hh.ru/resume/eb3a421e000712c52700000dc9636672587942"
+  },
+  {
+    "name": "",
+    "age": "30 лет",
+    "date_of_birth": "29 июня 1991",
+    "address": "Москва",
+    "metro": "",
+    "position": "Junior Data Scientist",
+    "salary": "80 000 руб.",
+    "specialization": [
+      "информационные технологии",
+      "интернет",
+      "мультимедиа",
+      "наука",
+      "образование",
+      "финансы",
+      "банки",
+      "инвестиции"
+    ],
+    "specialization_category": "Начало карьеры, студенты",
+    "exprerience": "Опыт работы 8 лет 7 месяцев",
+    "last_work": "Начальник лаборатории ОТК",
+    "work_place_count": "3",
+    "skills": [
+      "Python",
+      "Pandas",
+      "PyTorch",
+      "Sklearn",
+      "Numpy",
+      "MySQL",
+      "Matplotlib",
+      "Git",
+      "NLTK",
+      "XGBoost",
+      "CatBoost"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B2 — Средне-продвинутый"
+    ],
+    "link": "https://hh.ru/resume/c7a30dac0007f1f91e00000dc94552684e3748"
+  },
+  {
+    "name": "",
+    "age": "24 года",
+    "date_of_birth": "8 ноября 1996",
+    "address": "Москва",
+    "metro": "м. Фили",
+    "position": "Junior Data Scientist",
+    "salary": "",
+    "specialization": [
+      "информационные технологии",
+      "интернет",
+      "мультимедиа",
+      "производство",
+      "технологии",
+      "финансы",
+      "банки",
+      "инвестиции"
+    ],
+    "specialization_category": "Начало карьеры, студенты",
+    "exprerience": "",
+    "last_work": "",
+    "work_place_count": "0",
+    "skills": [
+      "Английский язык",
+      "Python",
+      "numpy",
+      "Pandas",
+      "keras",
+      "Машинное обучение"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — C1 — Продвинутый",
+      "Немецкий — A2 — Элементарный",
+      "Французский — A2 — Элементарный"
+    ],
+    "link": "https://hh.ru/resume/a4acce560008d9956900000dc9704b4f334f62"
+  },
+  {
+    "name": "",
+    "age": "",
+    "date_of_birth": "",
+    "address": "Москва",
+    "metro": "",
+    "position": "Data scientist, analytics ",
+    "salary": "50 000 руб.",
+    "specialization": [
+      "маркетинг",
+      "реклама",
+      "pr",
+      "наука",
+      "образование",
+      "финансы",
+      "банки",
+      "инвестиции"
+    ],
+    "specialization_category": "Начало карьеры, студенты",
+    "exprerience": "",
+    "last_work": "",
+    "work_place_count": "0",
+    "skills": [
+      "Python",
+      "HTML",
+      "SQL",
+      "XML",
+      "Bash",
+      "Flask",
+      "NLP",
+      "R",
+      "ML"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — C1 — Продвинутый",
+      "Французский — B2 — Средне-продвинутый"
+    ],
+    "link": "https://hh.ru/resume/ffceafc80008f88a7a00000dc9686569697367"
+  },
+  {
+    "name": "",
+    "age": "25 лет",
+    "date_of_birth": "28 сентября 1996",
+    "address": "Москва",
+    "metro": "",
+    "position": "Data Scientist",
+    "salary": "",
+    "specialization": [
+      "программирование",
+      "разработка",
+      "аналитик"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 2 года 5 месяцев",
+    "last_work": "Инженер по разработке",
+    "work_place_count": "2",
+    "skills": [
+      "Python",
+      "Git",
+      "Английский язык",
+      "Аналитический склад ума",
+      "SQL"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B1 — Средний",
+      "Китайский — A2 — Элементарный"
+    ],
+    "link": "https://hh.ru/resume/8b8c2ded0008fd8be500000dc9543272563267"
+  },
+  {
+    "name": "",
+    "age": "",
+    "date_of_birth": "",
+    "address": "Moscow",
+    "metro": "",
+    "position": "Data Scientist / Machine Learning Engineer",
+    "salary": "",
+    "specialization": [
+      "analyst",
+      "stocks",
+      "securities",
+      "portfolio investments"
+    ],
+    "specialization_category": "Banks, Investments, Finance",
+    "exprerience": "Work experience 5 years 11 months",
+    "last_work": "Data science learner",
+    "work_place_count": "4",
+    "skills": [
+      "Python",
+      "Git",
+      "Linux",
+      "Flask",
+      "pytorch",
+      "scikit-learn",
+      "opencv",
+      "scipy",
+      "numpy",
+      "pyspark",
+      "hadoop",
+      "hive",
+      "docker",
+      "Machine learning",
+      "Deep learning",
+      "NLP",
+      "Data Analysis",
+      "HFT",
+      "SQL",
+      "ООП",
+      "MongoDB",
+      "Математическая статистика",
+      "Анализ данных",
+      "JavaScript",
+      "PostgreSQL",
+      "Bash",
+      "Английский язык",
+      "A/B тесты",
+      "Теория вероятностей",
+      "Визуализация данных"
+    ],
+    "has_education": true,
+    "languages": [
+      "Russian — Native",
+      "English — C2 — Proficiency"
+    ],
+    "link": "https://hh.ru/resume/7a7fb1e100093a73dd00000dc9627176566362"
+  },
+  {
+    "name": "",
+    "age": "38 лет",
+    "date_of_birth": "27 октября 1982",
+    "address": "Лобня",
+    "metro": "",
+    "position": "Инвестиционный аналитик",
+    "salary": "100 000 руб.",
+    "specialization": [
+      "привлечение клиентов",
+      "портфельные инвестиции",
+      "корпоративное финансирование"
+    ],
+    "specialization_category": "Банки, инвестиции, лизинг",
+    "exprerience": "Опыт работы 1 год 4 месяца",
+    "last_work": "Начальник отдела продаж",
+    "work_place_count": "2",
+    "skills": [
+      "Стрелковой спорт",
+      "Без аварийное вождение транспорта",
+      "Опыт в продажах в качестве руководителя отдела продаж не менее 1 год; Опыт в сфере blockchain/cryp"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной"
+    ],
+    "link": "https://hh.ru/resume/09f512c900073dd89f00000dc9614749477659"
+  },
+  {
+    "name": "",
+    "age": "27 лет",
+    "date_of_birth": "23 февраля 1994",
+    "address": "Москва",
+    "metro": "",
+    "position": "Руководитель ",
+    "salary": "180 000 руб.",
+    "specialization": [
+      "другое",
+      "розничный бизнес",
+      "эмиссии"
+    ],
+    "specialization_category": "Банки, инвестиции, лизинг",
+    "exprerience": "Опыт работы 3 года 9 месяцев",
+    "last_work": "Клиентский менеджер Сбербанк Премьер",
+    "work_place_count": "4",
+    "skills": [
+      "Исполнительность",
+      "Дисциплинированность",
+      "Клиентоориентированность"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной"
+    ],
+    "link": "https://hh.ru/resume/0e1550fc0008264bcc00000dc9483870357a62"
+  },
+  {
+    "name": "",
+    "age": "21 year",
+    "date_of_birth": "18 November 1999",
+    "address": "Saint Petersburg",
+    "metro": "",
+    "position": "Junior Data Scientist",
+    "salary": "80 000 RUB",
+    "specialization": [
+      "software development",
+      "other",
+      "analyst"
+    ],
+    "specialization_category": "IT, Internet, Telecom",
+    "exprerience": "Work experience 10 months",
+    "last_work": "Junior Data Scientist I&DA",
+    "work_place_count": "4",
+    "skills": [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "scikit-learn",
+      "Matplotlib",
+      "Plotly",
+      "CatBoost",
+      "R",
+      "MATLAB",
+      "SQL",
+      "Математическая статистика",
+      "Математический анализ",
+      "Математическое моделирование",
+      "Математическое программирование",
+      "Публичные выступления",
+      "Организаторские навыки",
+      "Ведение переговоров",
+      "SPSS",
+      "AnyLogic",
+      "Power BI",
+      "Data Analysis",
+      "Machine Learning",
+      "Data Science",
+      "Alteryx",
+      "Keras"
+    ],
+    "has_education": true,
+    "languages": [
+      "Russian — Native",
+      "English — B2 — Upper Intermediate"
+    ],
+    "link": "https://hh.ru/resume/97e75898000834368e00000dc97662664a4a37"
+  },
+  {
+    "name": "",
+    "age": "29 лет",
+    "date_of_birth": "5 января 1992",
+    "address": "Москва",
+    "metro": "",
+    "position": " Инженер АСУ ТП",
+    "salary": "100 000 руб.",
+    "specialization": [
+      "инженер"
+    ],
+    "specialization_category": "Добыча сырья",
+    "exprerience": "Опыт работы 6 лет 6 месяцев",
+    "last_work": "Инженер АСУ",
+    "work_place_count": "2",
+    "skills": [
+      "Ответственный",
+      "Высокая скорость работы",
+      "Осуществление пусконаладочных работ АСУТП",
+      "Монтаж и наладка АСУТП",
+      "Продвинутый пользователь компьютера",
+      "Опыт работы с офисными программами",
+      "MS Word",
+      "Exel",
+      "MS PowerPoint",
+      "Опыт работы с микроконтролерами фирмы Текон",
+      "Знание принципов построения АСУТП",
+      "Чтение электрических и функциональных схем автоматизации",
+      "Опыт работы с датчиками Метран",
+      "Аналитический склад ума",
+      "Умение быстро выявить и устранить неисправность оборудования",
+      "Техническая грамотность",
+      "Знания принципов работы исполнительных механизмов промышленного оборудования в области энергетике"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной"
+    ],
+    "link": "https://hh.ru/resume/07f0d54000077f659200000dc95966514a6a30"
+  },
+  {
+    "name": "",
+    "age": "49 лет",
+    "date_of_birth": "8 февраля 1972",
+    "address": "Москва",
+    "metro": "м. Коломенская",
+    "position": "Директор по ИТ",
+    "salary": "",
+    "specialization": [
+      "программирование",
+      "разработка",
+      "системная интеграция"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 19 лет 2 месяца",
+    "last_work": "Технический директор",
+    "work_place_count": "5",
+    "skills": [
+      "Умение работать в команде, ориентированность на результат."
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — B2 — Средне-продвинутый",
+      "Немецкий — B2 — Средне-продвинутый"
+    ],
+    "link": "https://hh.ru/resume/d42456620000855cdc00000dc9736563726574"
+  },
+  {
+    "name": "",
+    "age": "",
+    "date_of_birth": "",
+    "address": "Москва",
+    "metro": "",
+    "position": "IT директор",
+    "salary": "500 000 руб.",
+    "specialization": [
+      "cto",
+      "cio",
+      "директор по it"
+    ],
+    "specialization_category": "Информационные технологии, интернет, телеком",
+    "exprerience": "Опыт работы 35 лет 1 месяц",
+    "last_work": "Заместитель генерального директора",
+    "work_place_count": "10",
+    "skills": [
+      "Управление рисками",
+      "Управление проектами",
+      "Финансовый менеджмент",
+      "Стратегический менеджмент",
+      "Организаторские навыки",
+      "Финансовое планирование",
+      "Финансовый контроль",
+      "Бизнес-планирование",
+      "Стратегическое планирование"
+    ],
+    "has_education": true,
+    "languages": [
+      "Русский — Родной",
+      "Английский — C1 — Продвинутый"
+    ],
+    "link": "https://hh.ru/resume/0bbf67e600034e469c00000dc94e3365464a59"
+  }
+]

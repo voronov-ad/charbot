@@ -1,0 +1,9 @@
+POST http://localhost:5000/employee
+Content-Type: application/json
+
+{
+  "id": "b9764c0b00077b55860039ed1f426a736d7239"
+}
+###
+GET http://localhost:5000/health
+Content-Type: application/json
