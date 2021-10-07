@@ -1,0 +1,6 @@
+POST http://localhost:8070/vacancy
+Content-Type: application/json
+
+{
+  "id": "41096400"
+}

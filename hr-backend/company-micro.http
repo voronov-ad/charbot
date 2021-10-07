@@ -1,0 +1,12 @@
+### - company-searcher
+POST http://localhost:8080/company
+Content-Type: application/json
+
+{
+  "name": "Билайн"
+}
+###
+GET http://localhost:5000/health
+Content-Type: application/json
+### - end
+### - vacancy- searcher

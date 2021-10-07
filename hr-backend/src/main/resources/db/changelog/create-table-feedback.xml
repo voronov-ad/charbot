@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-table-feedback" author="KhakinVA">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="FEEDBACK"/>
+            </not>
+        </preConditions>
+        <createTable tableName="FEEDBACK">
+            <column name="id"
+                    autoIncrement="true"
+                    type="number" >
+            </column>
+            <column name="url_vacancy" type="VARCHAR2(128 char)"/>
+            <column name="url_candidate" type="VARCHAR2(128 char)"/>
+            <column name="label" type="bool"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="url_index" author="KhakinVA">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="URLS_I" tableName="FEEDBACK"/>
+            </not>
+        </preConditions>
+
+        <createIndex indexName="URLS_I" tableName="FEEDBACK">
+            <column name="url_vacancy"/>
+            <column name="url_candidate"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+
+  backend:
+    image: sudohackin/hr-backend:latest
+    ports:
+      - "8060:9090"
+    volumes:
+      - db:/database/
+  resume-searcher:
+    image: sudohackin/hr-resume-parser:latest
+    ports:
+      - "8090:5000"
+  vacancy-searcher:
+    image: sudohackin/hr-vacancy-parser:latest
+    ports:
+      - "8070:5000"
+volumes:
+  db:
