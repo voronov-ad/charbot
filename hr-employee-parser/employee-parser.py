@@ -1,8 +1,45 @@
 import json
+from itertools import cycle
+from xml.etree.ElementTree import fromstring
 
 import requests
-from flask import Flask, request
 from bs4 import BeautifulSoup
+from flask import Flask, request, jsonify
+from lxml.html import fromstring
+
+headers = {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+}
+
+
+def get_proxies():
+    url = 'https://free-proxy-list.net/'
+    response = requests.get(url)
+    parser = fromstring(response.text)
+    proxies = set()
+    for i in parser.xpath('//tbody/tr')[:30]:
+        if i.xpath('.//td[7][contains(text(),"yes")]'):
+            # Grabbing IP and corresponding PORT
+            proxy = ":".join([i.xpath('.//td[1]/text()')[0], i.xpath('.//td[2]/text()')[0]])
+            proxies.add(proxy)
+
+    return proxies
+
+
+def invokeWithProxy(url):
+    proxies = get_proxies()
+    proxy_pool = cycle(proxies)
+    # Get a proxy from the pool
+    proxy = next(proxy_pool)
+    while True:
+        try:
+            return requests.get(url, headers=headers, proxies={"http://": proxy, "https://": proxy})
+        except Exception as e:
+            print(e)
+            # Most free proxies will often get connection errors. You will have retry the entire request using another proxy to work.
+            # We will just skip retries as its beyond the scope of this tutorial and we are only downloading a single url
+            print("Skipping. Connnection error")
+            proxy = next(proxy_pool)
 
 
 class MockNode:
@@ -25,7 +62,7 @@ def saveSearch(func):
         return MockNode()
 
 
-# app = Flask(__name__)
+app = Flask(__name__)
 
 
 class LastWork:
@@ -40,7 +77,7 @@ class Employee:
     metro: str
     position: str
     salary: str
-    specializations:[]
+    specializations: []
     specialization_category: str
     exprerience: str
     last_work: LastWork
@@ -50,7 +87,8 @@ class Employee:
     languages: []
     link: str
 
-    def __init__(self, name, age, date_of_birth, address, metro, position, salary, specialization,specialization_category, exprerience,
+    def __init__(self, name, age, date_of_birth, address, metro, position, salary, specialization,
+                 specialization_category, exprerience,
                  last_work,
                  work_place_count, skills, has_education, languages, link):
         self.name = name
@@ -74,13 +112,11 @@ class Employee:
 def parse_employee(id):
     URL = f"https://hh.ru/resume/{id}"
 
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
-    }
     print(URL)
 
     # cookies = {'hhtoken': 'G5WXUWnSUnlmqdfdKaIwMXJZsEtp'}
 
+    # page = invokeWithProxy(URL)
     page = requests.get(URL, headers=headers)
     print("Status" + str(page.status_code))
     if page.status_code == 403:
@@ -106,7 +142,8 @@ def parse_employee(id):
     else:
         movement = True
     position = saveSearch(lambda: soup.find("span", class_="resume-block__title-text"))
-    specialization_category = saveSearch(lambda: soup.find("span", attrs={"data-qa": "resume-block-specialization-category"}))
+    specialization_category = saveSearch(
+        lambda: soup.find("span", attrs={"data-qa": "resume-block-specialization-category"}))
     specializations_nodes = soup.findAll("li", attrs={"data-qa": "resume-block-position-specialization"})
     specializations = []
     for node in specializations_nodes:
@@ -126,8 +163,10 @@ def parse_employee(id):
         lastWork = works[0]
         lastWorkPlacePosition = lastWork.find("div", attrs={"data-qa": "resume-block-experience-position"})
 
+    tags = []
     skillsNode = soup.find("div", attrs={"data-qa": "skills-table"})
-    tags = skillsNode.findAll("span", attrs={"data-qa": "bloko-tag__text"})
+    if skillsNode is not None:
+        tags = skillsNode.findAll("span", attrs={"data-qa": "bloko-tag__text"})
 
     education = soup.findAll("div", attrs={"data-qa": "resume-block-education-item"})
     hasEducation = False
@@ -144,7 +183,7 @@ def parse_employee(id):
                         languages=[i.text for i in languages],
                         link=URL
                         )
-    return employee.__dict__
+    return employee
 
 
 @app.route('/health', methods=['GET'])
@@ -159,7 +198,36 @@ def employee_controller():
     if not id:
         return "Employee id must not be empty", 400
     # resumeId = "0bbf67e600034e469c00000dc94e3365464a59"
-    return parse_employee(id)
+    return parse_employee(id).__dict__
+
+
+@app.route('/employee-search', methods=['POST'])
+def employee_search_controller():
+    request_json = request.get_json(silent=True)
+    title = request_json['title']
+    if not title:
+        return "Title id must not be empty", 400
+    # resumeId = "0bbf67e600034e469c00000dc94e3365464a59"
+    links = load_employee_links(title)
+    result = []
+    for link in links:
+        pos = link.find('/', 1)
+        try:
+            employee = parse_employee(link[pos + 1:])
+        except Exception as e:
+            print(e)
+        if employee is not None:
+            result.append(employee.__dict__)
+    return jsonify(result)
+
+
+def load_employee_links(title):
+    url = f"https://hh.ru/search/resume?area=1&isDefaultArea=true&exp_period=all_time&logic=normal&pos=full_text&fromSearchLine=true&clusters=True&ored_clusters=True&order_by=relevance&text={title}&from=suggest_post"
+    employee_result_page = requests.get(url, headers=headers)
+    soup = BeautifulSoup(employee_result_page.content, "html.parser")
+    links = soup.findAll("a", class_="resume-search-item__name")
+    return [i['href'] for i in links]
+
 
 def main():
     with open('links.txt', 'r', newline='') as txtFile:
