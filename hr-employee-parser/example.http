@@ -1,9 +1,0 @@
-POST http://localhost:5001/company
-Content-Type: application/json
-
-{
-  "name": "Рамблер"
-}
-###
-GET http://localhost:5000/health
-Content-Type: application/json

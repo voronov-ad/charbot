@@ -1,18 +1,9 @@
-POST http://localhost:9090/employee
+POST http://localhost:5000/vacancy
 Content-Type: application/json
 
 {
-  "id": "b9764c0b00077b55860039ed1f426a736d7239"
+  "id": "48125203"
 }
-
-###
-POST http://localhost:9090/employee-search
-Content-Type: application/json
-
-{
-  "title": "Java"
-}
-
 ###
 GET http://localhost:5000/health
 Content-Type: application/json
