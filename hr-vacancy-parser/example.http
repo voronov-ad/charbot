@@ -1,0 +1,9 @@
+POST http://localhost:5000/vacancy
+Content-Type: application/json
+
+{
+  "id": "48125203"
+}
+###
+GET http://localhost:5000/health
+Content-Type: application/json
