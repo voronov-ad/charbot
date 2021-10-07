@@ -191,7 +191,7 @@ def health():
     return "UP"
 
 
-@app.route('/employee', methods=['POST'])
+@app.route('/resume', methods=['POST'])
 def employee_controller():
     request_json = request.get_json(silent=True)
     id = request_json['id']
@@ -201,7 +201,7 @@ def employee_controller():
     return parse_employee(id).__dict__
 
 
-@app.route('/employee-search', methods=['POST'])
+@app.route('/resume-search', methods=['POST'])
 def employee_search_controller():
     request_json = request.get_json(silent=True)
     title = request_json['title']
