@@ -1,7 +1,7 @@
 from aiohttp import ClientSession
 from pydantic import BaseModel
-from typing import Union
-from base.schemas import Resume, Vacancy
+from typing import Union, List, Optional
+from base.schemas import Resume, Vacancy, Feedback
 from asyncio import BoundedSemaphore
 import yaml
 
@@ -22,6 +22,7 @@ class BackendAdapter:
     VACANCY_ALL = "http://{address}:8060//api/v1/vacancy"
     VACANCY2RESUME = "http://{address}:8060/api/related-vacancy?id={id}"
     FEEDBACK_SEND = "http://{address}:8060/feedback"
+    FEEDBACK_GET_ALL = "http://{address}:8060/api/v1/feedback"
     RESUME_SEARCH = "http://{address}:8090/resume-search"
     RESUME_GET = "http://{address}:8090/resume"
     RESUME_ALL = "http://{address}:8060/api/v1/resume"
@@ -46,6 +47,8 @@ class BackendAdapter:
                 ssl=False) as resp:
             if resp.status == 200:
                 return [Resume(**resp_item) for resp_item in await resp.json()]
+            else:
+                return None
 
     async def hh_resume_get(self, ids: str):
         async with self._client.post(
@@ -53,6 +56,8 @@ class BackendAdapter:
                 ssl=False) as resp:
             if resp.status == 200:
                 return Resume(**await resp.json())
+            else:
+                return None
 
     async def hh_vacancy_get(self, ids: str):
         async with self._client.post(
@@ -60,6 +65,8 @@ class BackendAdapter:
                 ssl=False) as resp:
             if resp.status == 200:
                 return Vacancy(**await resp.json())
+            else:
+                return None
 
     async def hh_vacancy_to_resume(self, ids: str):
         async with self._client.get(
@@ -74,18 +81,32 @@ class BackendAdapter:
                 ssl=False) as resp:
             if resp.status == 200:
                 return True
+            else:
+                return None
+
+    async def feedback_all(self) -> Optional[List[Feedback]]:
+        async with self._client.get(
+                url=self.FEEDBACK_GET_ALL.format(address=self._config.address), ssl=False) as resp:
+            if resp.status == 200:
+                return Feedback.from_list_dict(await resp.json())
+            else:
+                return None
 
     async def vacancy_all(self):
         async with self._client.get(
                 url=self.VACANCY_ALL.format(address=self._config.address), ssl=False) as resp:
             if resp.status == 200:
                 return await resp.json()
+            else:
+                return None
 
     async def resume_all(self):
         async with self._client.get(
                 url=self.RESUME_ALL.format(address=self._config.address), ssl=False) as resp:
             if resp.status == 200:
                 return await resp.json()
+            else:
+                return None
 
     async def vacancy_by_id(self, ids: str):
         async with self._client.get(
@@ -100,3 +121,5 @@ class BackendAdapter:
                 url=self.RESUME_BY_ID.format(address=self._config.address, id=ids), ssl=False) as resp:
             if resp.status == 200:
                 return Resume(**await resp.json())
+            else:
+                return None

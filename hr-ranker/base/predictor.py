@@ -31,6 +31,7 @@ class RankModelConfig(BaseModel):
         with open(path, "r") as reader:
             return cls(**yaml.safe_load(reader))
 
+
 class RankModel:
     _model: CatBoostRegressor
     _config: RankModelConfig
@@ -73,7 +74,7 @@ class RankModel:
 
     def fit(self, data: pd.DataFrame):
         X_train, X_test, y_train, y_test = train_test_split(
-            data[[label for label in train_dataset.columns if label != PREDICT_LABEL]],
+            data[[label for label in data.columns if label != PREDICT_LABEL]],
             data[PREDICT_LABEL],
             test_size=self._config.train_size,
             random_state=self._config.random_state

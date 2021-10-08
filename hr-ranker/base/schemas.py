@@ -1,9 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional, List, Union
+from typing import Optional, List, Union, Any
 from stop_words import get_stop_words
 import difflib
 from nltk.stem.snowball import SnowballStemmer
 from pymystem3 import Mystem
+from uuid import uuid4
 import numpy as np
 import orjson
 import re
@@ -103,7 +104,16 @@ class Model(BaseModel):
 
     @classmethod
     def from_list_dict(cls, data: List[dict]):
-        return [cls(**item) for item in data if item is not None]
+        return [cls(**item) for item in data if item is not None and isinstance(item, dict)]
+
+
+class Company(Model):
+    area: Optional[List[str]]
+    city: str = "Москва"
+    description: Optional[str]
+    link: Optional[str]
+    name: str = "Default"
+    vacancies: Optional[int] = 0
 
 
 class Vacancy(Model):
@@ -115,6 +125,15 @@ class Vacancy(Model):
     tags: List[str]
     title: str
     description: str
+    company: Optional[Company]
+
+    @classmethod
+    def get_new_link(cls):
+        return f"https://hh.ru/vacancy/{uuid4().hex}"
+
+    @classmethod
+    def get_default_company_name(cls):
+        return "Сбербанк"
 
     def get_min_salary(self):
         match = re.search(r'от\s?[\xa0]?\d{1,4}\s?[\u202f]?\d{1,4}', self.salary)
@@ -257,6 +276,19 @@ class Resume(Model):
             "aged_work_experience_score": self.get_work_experience_score_over_ages(),
             "title_specialization_match_score": self.get_specialization_match(vacancy.title)
         }
+
+
+class Feedback(Model):
+    id: int
+    url_candidate: str
+    url_vacancy: str
+    label: int
+
+    def get_vacancy_id(self, ):
+        return re.sub(r'https://hh.ru/vacancy/', '', self.url_vacancy)
+
+    def get_resume_id(self):
+        return re.sub(r'https://hh.ru/resume/', '', self.url_candidate)
 
 
 def get_dataset(resume_list: List[Resume], vacancy_list: List[Vacancy], labels: List[Union[bool, int, float]]):

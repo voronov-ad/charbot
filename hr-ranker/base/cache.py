@@ -24,6 +24,14 @@ class FastLRUCache(object):
         except KeyError:
             raise KeyError("key %s not found" % key)
 
+    def get(self, key, default=None):
+        try:
+            value = self.__key2value[key]
+            self.__update_weight(key)
+            return value
+        except KeyError:
+            return default
+
     def __setitem__(self, key, value):
         self.__key2value[key] = value
         self.__update_weight(key)
