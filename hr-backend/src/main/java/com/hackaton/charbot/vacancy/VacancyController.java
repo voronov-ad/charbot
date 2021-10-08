@@ -2,10 +2,7 @@ package com.hackaton.charbot.vacancy;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -16,6 +13,11 @@ import java.util.List;
 public class VacancyController {
 
     private final VacancyStorage storage;
+
+    @PostMapping(consumes = "application/json")
+    void register(@RequestBody Vacancy vacancy){
+        storage.save(vacancy);
+    }
 
     @GetMapping(path = "/{id}")
     Vacancy getById(@PathVariable String id) {
