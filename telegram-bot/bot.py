@@ -19,19 +19,21 @@ from telegram import Update, ForceReply, InlineKeyboardButton, InlineKeyboardMar
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
 
 # Enable logging
-from .ide import IDEIntegration, IDEtoTelegramResponseMapper
-from .learning import reply_learning_data, send_learning_data, get_learning_data, learning_replies
-from .logger import get_logger
-from .mode import Mode
-from .post_process import new_post_process
+from ide import IDEIntegration, IDEtoTelegramResponseMapper
+from learning import reply_learning_data, send_learning_data, get_learning_data, learning_replies
+from logger import get_logger
+from mode import Mode
+from post_process import new_post_process
 
 logger = get_logger(__name__)
 ide_manager = IDEIntegration("https://smartapp-code.sberdevices.ru/chatadapter/chatapi/webhook/sber_nlp2/YVQzMyZP:2ba00f91b1388ba5f4ce8f9b4533d23299ee4a67")
 ide_resume = IDEIntegration("https://smartapp-code.sberdevices.ru/chatadapter/chatapi/webhook/sber_nlp2/aDiuLgne:a284b64c225020ceee53f7834eeb909e43891e0f")
+ide_screening = IDEIntegration("https://smartapp-code.sberdevices.ru/chatadapter/chatapi/webhook/sber_nlp2/TtqWopAl:518003018d2fd748c329106d5a4f7e2a45970f4a")
 ide_response_mapper = IDEtoTelegramResponseMapper()
 
 IDEs = {
     "new": ide_manager,
+    "screening": ide_screening,
     "create_resume": ide_resume
 }
 
@@ -60,8 +62,10 @@ def help_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
     update.message.reply_text('Я создан, чтобы помогать искать резюме :) У меня есть несколько команд.')
     update.message.reply_text('/new - новый поиск кандидатов.')
+    update.message.reply_text('/screening - прохождение скринига для кандидата.')
+    update.message.reply_text('/create_resume - помощь в создании резюме для кандидата.')
     update.message.reply_text('/run_learning - команда для запуска режима обучения модели.')
-    update.message.reply_text('/stop - команда для завершения режима обучения модели.')
+    update.message.reply_text('/stop - команда для завершения каждого из режимов.')
 
 
 def start(update: Update, context: CallbackContext) -> None:
@@ -95,6 +99,18 @@ def new(update: Update, context: CallbackContext) -> None:
         )
     else:
         context.user_data["mode"] = Mode.NEW
+        send_event("new", update, context)
+
+
+def screening(update: Update, context: CallbackContext) -> None:
+    """Завести новое резюме."""
+    mode = context.user_data.get("mode", None)
+    if mode:
+        update.message.reply_text(
+            f"Запущен mode {mode}. Необходимо его остановить командой /stop прежде, чем запускать новый сценарий."
+        )
+    else:
+        context.user_data["mode"] = Mode.SCREENING
         send_event("new", update, context)
 
 
@@ -202,8 +218,13 @@ def run_learning(update: Update, context: CallbackContext) -> None:
 
 def stop(update: Update, context: CallbackContext) -> None:
     """ Запустить обучение. """
+    mode = context.user_data["mode"]
     context.user_data["mode"] = None
     update.message.reply_text("Процесс обучения завершён.")
+
+    if mode == Mode.LEARNING and context.user_data.get("vacancy_id", None):
+        data = get_learning_data(context.user_data["vacancy_id"])
+        update.message.reply_text(f"Тебе лучше всего подойдут кандидаты: {', '.join(data)}")
 
 
 def main() -> None:
@@ -220,6 +241,7 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("new", new))
     dispatcher.add_handler(CommandHandler("run_learning", run_learning))
     dispatcher.add_handler(CommandHandler("stop", stop))
+    dispatcher.add_handler(CommandHandler("screening", screening))
     dispatcher.add_handler(CommandHandler("create_resume", create_resume))
     dispatcher.add_handler(CallbackQueryHandler(button))
 

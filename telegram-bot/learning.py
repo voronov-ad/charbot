@@ -1,6 +1,6 @@
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+from logger import get_logger
 from requests import post, get
-from .logger import get_logger
 from json import dumps
 
 logger = get_logger(__name__)
@@ -19,6 +19,7 @@ def reply_learning_data(vacancy_id, resume, message, context):
 
 def get_learning_data(vacancy_id):
     data = get(f'http://localhost:8060/api/related-vacancy?id={vacancy_id}')
+    logger.info(data)
     return data.json()
 
 
