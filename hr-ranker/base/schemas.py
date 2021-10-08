@@ -255,6 +255,7 @@ class Resume(Model):
         }
 
 
+
 def get_dataset(resume_list: List[Resume], vacancy_list: List[Vacancy], labels: List[Union[bool, int, float]]):
     assert len(resume_list) == len(vacancy_list) == len(labels)
     dataset = []
@@ -276,5 +277,5 @@ if __name__ == '__main__':
         for vac in vacancy_list:
             train_resume.append(res)
             train_vacancy.append(vac)
-            train_labels.append(random.randint(0, 1))
+            train_labels.append(float(random.randint(0, 1)))
     train_dataset = get_dataset(train_resume, train_vacancy, train_labels)
