@@ -42,4 +42,4 @@ theme: /
         state: Конец
             a: Спасибо за скриннинг! Мы с Вами обязательно свяжемся!
             script:
-                $client.questions = $session.step)
+                $client.questions = $session.step
