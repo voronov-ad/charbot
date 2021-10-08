@@ -7,4 +7,6 @@
     <include file="create-table-resume.xml" relativeToChangelogFile="true"/>
     <include file="create-table-vacancy.xml" relativeToChangelogFile="true"/>
     <include file="create-table-feedback.xml" relativeToChangelogFile="true"/>
+    <include file="resume-add-column.xml" relativeToChangelogFile="true" />
+    <include file="vacancy-add-column.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="add-column-resume" author="KhakinVA">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="resume" columnName="resume_link"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="resume">
+            <column name="resume_link" type="text"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="resume_link_i" author="KhakinVA">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="resume_link_i" tableName="resume"/>
+            </not>
+        </preConditions>
+
+        <createIndex indexName="resume_link_i" tableName="resume">
+            <column name="resume_link"/>
+        </createIndex>
+    </changeSet>
+
+
+
+</databaseChangeLog>

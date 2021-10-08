@@ -24,12 +24,12 @@ public class JdbcVacancyStorage implements VacancyStorage {
     @SneakyThrows
     @Override
     public void save(Vacancy vacancy) {
-        MapSqlParameterSource in = new MapSqlParameterSource();
-        in.addValue("id", vacancy.getId());
-        in.addValue("vacancy_data", new SqlLobValue(objectMapper.writeValueAsString(vacancy),
-                new DefaultLobHandler()), Types.CLOB);
-        jdbcTempalte.update("insert into vacancy(id, vacancy_data) values (:id, :vacancy_data) on conflict(id) " +
-                "do update set vacancy_data = excluded.vacancy_data", in);
+        MapSqlParameterSource in = new MapSqlParameterSource("id", vacancy.getId())
+        .addValue("vacancy_data", new SqlLobValue(objectMapper.writeValueAsString(vacancy),
+                new DefaultLobHandler()), Types.CLOB)
+                .addValue("vacancy_link", vacancy.getLink());
+        jdbcTempalte.update("insert into vacancy(id, vacancy_data, vacancy_link) values (:id, :vacancy_data, :vacancy_link) on conflict(id) " +
+                "do update set vacancy_data = excluded.vacancy_data, vacancy_link= excluded.vacancy_link", in);
     }
 
     @SneakyThrows

@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="add-column-vacancy" author="KhakinVA">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="vacancy" columnName="vacancy_link"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="vacancy">
+            <column name="vacancy_link" type="text"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="vacancy_link_i" author="KhakinVA">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="vacancy_link_i" tableName="vacancy"/>
+            </not>
+        </preConditions>
+
+        <createIndex indexName="vacancy_link_i" tableName="vacancy">
+            <column name="vacancy_link"/>
+        </createIndex>
+    </changeSet>
+
+
+
+</databaseChangeLog>

@@ -24,12 +24,12 @@ public class JsbcResumeStorage implements ResumeStorage {
     @SneakyThrows
     @Override
     public void save(Resume resume) {
-        MapSqlParameterSource in = new MapSqlParameterSource();
-        in.addValue("id", resume.getId());
-        in.addValue("resume_data", new SqlLobValue(objectMapper.writeValueAsString(resume),
-                new DefaultLobHandler()), Types.CLOB);
-        jdbcTempalte.update("insert into resume(id, resume_data) values (:id, :resume_data) " +
-                "on conflict(id) do update set resume_data = excluded.resume_data", in);
+        MapSqlParameterSource in = new MapSqlParameterSource("id", resume.getId())
+        .addValue("resume_data", new SqlLobValue(objectMapper.writeValueAsString(resume),
+                new DefaultLobHandler()), Types.CLOB)
+        .addValue("resume_link", resume.getLink());
+        jdbcTempalte.update("insert into resume(id, resume_data, resume_link) values (:id, :resume_data, :resume_link) " +
+                "on conflict(id) do update set resume_data = excluded.resume_data, resume_link = excluded.resume_link", in);
     }
 
     @SneakyThrows
