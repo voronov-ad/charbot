@@ -38,15 +38,15 @@ async def suggest(request: RequestSuggest):
     link = Vacancy.get_new_link()
     vacancy = Vacancy(**{
         "companyName": Vacancy.get_default_company_name(),
-        "employeeMode": request.schedule,
+        "employeeMode": request.schedule or "",
         "experience": request.experience,
         "link": link,
         "salary": f"{request.salary_from} {request.salary_to}",
         "tags": request.skills,
         "title": request.title,
-        "description": request.comment,
+        "description": request.comment or "",
         "company": {
-            "city": request.city,
+            "city": request.city or "",
             "area": request.skills,
             "description": request.comment,
             "name": Vacancy.get_default_company_name()
