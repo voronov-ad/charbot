@@ -71,6 +71,6 @@ public class JdbcFeedbackStorage implements FeedbackStorage {
 
     @Override
     public List<Feedback> findAll() {
-        return jdbcOperations.getJdbcOperations().queryForList("select * from feedback", Feedback.class);
+        return jdbcOperations.getJdbcOperations().query("select * from feedback", new BeanPropertyRowMapper<>(Feedback.class));
     }
 }

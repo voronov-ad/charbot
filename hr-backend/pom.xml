@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hackaton.charbot.hrbackend</groupId>
 	<artifactId>hr-backend</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<name>resume-cacher</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
