@@ -16,6 +16,7 @@ def new_post_process(data, message, context):
     result = post("http://192.168.1.149:8001/suggest", data=dumps(data), headers=headers)
     context.user_data["resume_list"] = result.json()["result"][::-1]
     context.user_data["vacancy_id"] = result.json()["vacancy"] or "12345"
+    context.user_data["dataLoad"] = data
     context.user_data["mode"] = Mode.LEARNING
     message.reply_text(
         "Я подготовил для вас подборку резюме. Но необходимо помочь их мне отранжировать. "

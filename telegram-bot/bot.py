@@ -13,8 +13,9 @@ Basic Echobot example, repeats messages.
 Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
+from json import dumps
 
-
+from requests import post
 from telegram import Update, ForceReply, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
 
@@ -222,9 +223,14 @@ def stop(update: Update, context: CallbackContext) -> None:
     context.user_data["mode"] = None
     update.message.reply_text("Процесс обучения завершён.")
 
-    if mode == Mode.LEARNING and context.user_data.get("vacancy_id", None):
-        data = get_learning_data(context.user_data["vacancy_id"])
-        update.message.reply_text(f"Тебе лучше всего подойдут кандидаты: {', '.join(data)}")
+    if mode == Mode.LEARNING and context.user_data.get("vacancy_id", None) and context.user_data.get("dataLoad", None):
+        headers = {
+            'Content-type': 'application/json',
+            'Accept': '*/*'
+        }
+        data = post("http://192.168.1.149:8001/suggest", data=dumps(context.user_data["dataLoad"]), headers=headers)
+        # data = get_learning_data(context.user_data["vacancy_id"])
+        update.message.reply_text(f"Тебе лучше всего подойдут кандидаты: {data.json()['result'][:10]}")
 
 
 def main() -> None:
