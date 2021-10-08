@@ -2,7 +2,7 @@ version: "3.9"
 services:
 
   backend:
-    image: sudohackin/hr-backend:1.0.4
+    image: sudohackin/hr-backend:1.0.8
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hr
       SPRING_DATASOURCE_USERNAME: "hr-hackaton"

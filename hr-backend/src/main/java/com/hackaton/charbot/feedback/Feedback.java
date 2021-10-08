@@ -7,5 +7,5 @@ public class Feedback {
     String id;
     String url_vacancy;
     String url_candidate;
-    String label;
+    Integer label;
 }

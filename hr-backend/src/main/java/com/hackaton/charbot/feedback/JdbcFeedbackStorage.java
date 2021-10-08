@@ -45,11 +45,10 @@ public class JdbcFeedbackStorage implements FeedbackStorage {
     private void update(Integer id, Feedback feedback) {
         jdbcOperations.update(" update feedback set label = :label where id = :id",
                 new MapSqlParameterSource("id", id)
-                        .addValue("label", Boolean.parseBoolean(feedback.getLabel())));
+                        .addValue("label", feedback.getLabel()));
     }
 
     private Integer saveNew(Feedback feedback) {
-
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         String id_column = "id";
@@ -58,7 +57,7 @@ public class JdbcFeedbackStorage implements FeedbackStorage {
                             new String[]{id_column});
                     ps.setString(1, feedback.getUrl_vacancy());
                     ps.setString(2, feedback.getUrl_candidate());
-                    ps.setBoolean(3, Boolean.parseBoolean(feedback.getLabel()));
+                    ps.setInt(3, feedback.getLabel());
                     return ps;
                 }
                 , keyHolder);

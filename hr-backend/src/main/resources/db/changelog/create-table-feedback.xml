@@ -34,4 +34,12 @@
         </createIndex>
     </changeSet>
 
+    <changeSet  author="KhakinVA"  id="change_label_type_to_int">
+        <modifyDataType  columnName="label"
+                         newDataType="int"
+                         tableName="feedback"/>
+    </changeSet>
+
+
+
 </databaseChangeLog>
