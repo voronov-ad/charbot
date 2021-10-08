@@ -101,6 +101,10 @@ class Model(BaseModel):
         with open(path, "r") as reader:
             return [cls(**inst) for inst in orjson.loads(reader.read())]
 
+    @classmethod
+    def from_list_dict(cls, data: List[dict]):
+        return [cls(**item) for item in data if item is not None]
+
 
 class Vacancy(Model):
     companyName: str
@@ -253,7 +257,6 @@ class Resume(Model):
             "aged_work_experience_score": self.get_work_experience_score_over_ages(),
             "title_specialization_match_score": self.get_specialization_match(vacancy.title)
         }
-
 
 
 def get_dataset(resume_list: List[Resume], vacancy_list: List[Vacancy], labels: List[Union[bool, int, float]]):

@@ -1,10 +1,11 @@
 import os
 from catboost import CatBoostRegressor
 from sklearn.model_selection import train_test_split
+from base.api import ResultItem
 from pydantic import BaseModel
 from base.schemas import Resume, Vacancy, get_dataset
 import random
-from typing import List
+from typing import List, Dict, Any
 import yaml
 import pandas as pd
 
@@ -30,7 +31,6 @@ class RankModelConfig(BaseModel):
         with open(path, "r") as reader:
             return cls(**yaml.safe_load(reader))
 
-
 class RankModel:
     _model: CatBoostRegressor
     _config: RankModelConfig
@@ -44,6 +44,16 @@ class RankModel:
             learning_rate=self._config.learning_rate
         )
         self.load_model()
+        self._resume_list = []
+
+    def save_resume_cache(self, res_list: List[Resume]):
+        self._resume_list = res_list[:self._config.resume_list_size]
+
+    def predict_local(self, vacancy: Vacancy):
+        if len(self._resume_list) == 0:
+            return []
+        return [ResultItem(url=resume.link, score=pred)
+                for pred, resume in zip(self.predict(self._resume_list, vacancy), self._resume_list)]
 
     @classmethod
     def from_yaml(cls, path: str):
@@ -98,3 +108,4 @@ if __name__ == '__main__':
     ranker.fit(train_dataset)
     print(ranker.predict(train_resume[:1], vacancy=vacancy_list[0]))
     print(ranker.predict_single(train_resume[0], vacancy_list[0]))
+    ranker.save_file()
