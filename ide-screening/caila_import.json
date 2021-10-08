@@ -1,0 +1,173 @@
+{
+  "project" : {
+    "id" : "screening-60271-biW",
+    "name" : "screening-60271-biW",
+    "folder" : "/jaicp"
+  },
+  "settings" : {
+    "language" : "ru",
+    "spellingCorrection" : false,
+    "classificationAlgorithm" : "sts",
+    "timezone" : "UTC",
+    "shared" : false
+  },
+  "intents" : [ {
+    "id" : 240406,
+    "path" : "/пока",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "пока"
+    } ]
+  }, {
+    "id" : 240407,
+    "path" : "/привет",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "привет"
+    } ]
+  } ],
+  "entities" : [ {
+    "entity" : {
+      "id" : 134886,
+      "name" : "analyst_spec",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : false,
+      "noMorph" : false
+    },
+    "records" : [ {
+      "id" : 12384339,
+      "type" : "synonyms",
+      "rule" : [ "системный" ],
+      "value" : "{\n\"id\": \"system\"\n}"
+    }, {
+      "id" : 12384340,
+      "type" : "synonyms",
+      "rule" : [ "бизнес", "бизнесовый" ],
+      "value" : "{\n\"id\": \"business\"\n}"
+    } ]
+  }, {
+    "entity" : {
+      "id" : 134887,
+      "name" : "company",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : false,
+      "noMorph" : false
+    },
+    "records" : [ {
+      "id" : 12384341,
+      "type" : "synonyms",
+      "rule" : [ "Сбер", "сбребанк" ],
+      "value" : "{\n\"id\": \"sber\",\n\"text\": \"Сбер\"\n}"
+    }, {
+      "id" : 12384342,
+      "type" : "synonyms",
+      "rule" : [ "Яндекс", "yandex", "яндексойд" ],
+      "value" : "{\n\"id\": \"yandex\",\n\"text\": \"Yandex\"\n}"
+    }, {
+      "id" : 12384343,
+      "type" : "synonyms",
+      "rule" : [ "mail", "mail ru", "mail.ru", "мэйл", "мэйле" ],
+      "value" : "{\n\"id\": \"mail.ru\",\n\"text\": \"Mail Ru Group\"\n}"
+    } ]
+  }, {
+    "entity" : {
+      "id" : 134888,
+      "name" : "dev_lang",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : false,
+      "noMorph" : false
+    },
+    "records" : [ {
+      "id" : 12384344,
+      "type" : "synonyms",
+      "rule" : [ "python", "питон", "питонист", "пайтон", "pyton", "питончик" ],
+      "value" : "{\n  \"id\": \"python\",\n  \"text\": \"Python\"\n}"
+    }, {
+      "id" : 12384345,
+      "type" : "synonyms",
+      "rule" : [ "java", "жава", "джава", "джавист", "жавист" ],
+      "value" : "{\n  \"id\": \"java\",\n  \"text\": \"Java\"\n}"
+    }, {
+      "id" : 12384346,
+      "type" : "synonyms",
+      "rule" : [ "си", "си плюс", "си плюс плюс", "плюсы" ],
+      "value" : "{\n  \"id\": \"c\",\n  \"text\": \"C++\"\n}"
+    } ]
+  }, {
+    "entity" : {
+      "id" : 134889,
+      "name" : "dev_level",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : false,
+      "noMorph" : false
+    },
+    "records" : [ {
+      "id" : 12384347,
+      "type" : "synonyms",
+      "rule" : [ "middle", "миддл" ],
+      "value" : "{\n  \"id\": \"middle\",\n  \"text\": \"Middle\"\n}"
+    }, {
+      "id" : 12384348,
+      "type" : "synonyms",
+      "rule" : [ "синьор", "senior", "лид", "lead" ],
+      "value" : "{\n  \"id\": \"senior\",\n  \"text\": \"Senior\"\n}"
+    }, {
+      "id" : 12384349,
+      "type" : "synonyms",
+      "rule" : [ "джун", "junior", "jun" ],
+      "value" : "{\n  \"id\": \"junior\",\n  \"text\": \"Junior\"\n}"
+    }, {
+      "id" : 12384350,
+      "type" : "synonyms",
+      "rule" : [ "стажёр", "начинающий", "новчиок", "стажер", "стажор" ],
+      "value" : "{\n  \"id\": \"trainee\",\n  \"text\": \"Стажер\"\n}"
+    } ]
+  }, {
+    "entity" : {
+      "id" : 134890,
+      "name" : "position",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : false,
+      "noMorph" : false
+    },
+    "records" : [ {
+      "id" : 12384351,
+      "type" : "synonyms",
+      "rule" : [ "менеджер", "менеджер проекта", "продакт", "продакта", "проджект", "прожект", "проджекта", "прожекта", "project", "project manager", "manager" ],
+      "value" : "{\n  \"id\": \"manager\",\n  \"text\": \"Менеджер проекта\"\n}"
+    }, {
+      "id" : 12384352,
+      "type" : "synonyms",
+      "rule" : [ "Аналитик", "аналитика" ],
+      "value" : "{\n  \"id\": \"analyst\",\n  \"text\": \"аналитик\"\n}"
+    }, {
+      "id" : 12384353,
+      "type" : "synonyms",
+      "rule" : [ "разработчик", "developer", "разраб" ],
+      "value" : "{\n  \"id\": \"dev\",\n  \"text\": \"Разработчик\"\n}"
+    }, {
+      "id" : 12384354,
+      "type" : "synonyms",
+      "rule" : [ "девопс", "девопсер", "devops" ],
+      "value" : "{\n  \"id\": \"devops\",\n  \"text\": \"DevOps инженер\"\n}"
+    } ]
+  } ],
+  "enabledSystemEntities" : [ "duckling.number", "duckling.time", "duckling.duration", "duckling.phone-number", "duckling.email", "duckling.url" ]
+}
