@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +36,7 @@ public class JdbcFeedbackStorage implements FeedbackStorage {
     public Optional<Feedback> findById(String id) {
         try {
             return Optional.ofNullable(jdbcOperations.queryForObject("select * from feedback where id = :id",
-                    new MapSqlParameterSource("id", id), new BeanPropertyRowMapper<>(Feedback.class)));
+                    new MapSqlParameterSource("id", Integer.parseInt(id)), new BeanPropertyRowMapper<>(Feedback.class)));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -46,14 +45,14 @@ public class JdbcFeedbackStorage implements FeedbackStorage {
     private void update(Integer id, Feedback feedback) {
         jdbcOperations.update(" update feedback set label = :label where id = :id",
                 new MapSqlParameterSource("id", id)
-                        .addValue("label", feedback.getLabel()));
+                        .addValue("label", Boolean.parseBoolean(feedback.getLabel())));
     }
 
     private Integer saveNew(Feedback feedback) {
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
-        String id_column = "ID";
+        String id_column = "id";
         jdbcOperations.getJdbcOperations().update(con -> {
                     PreparedStatement ps = con.prepareStatement("insert into feedback(url_vacancy, url_candidate, label) values(?, ?, ?)",
                             new String[]{id_column});
@@ -63,7 +62,7 @@ public class JdbcFeedbackStorage implements FeedbackStorage {
                     return ps;
                 }
                 , keyHolder);
-        return ((BigDecimal) keyHolder.getKeys().get(id_column)).intValue();
+        return (Integer) keyHolder.getKeys().get(id_column);
 //        jdbcOperations.update("insert into feedback(url_vacancy, url_candidate, label) values(:vacancy, :candidate, :label)",
 //                new MapSqlParameterSource("vacancy", feedback.getUrl_vacancy())
 //                        .addValue("candidate", feedback.getUrl_candidate())

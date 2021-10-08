@@ -7,11 +7,11 @@
     <changeSet id="create-table-vacancy" author="KhakinVA">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="VACANCY"/>
+                <tableExists tableName="vacancy"/>
             </not>
         </preConditions>
-        <createTable tableName="VACANCY">
-            <column name="id" type="number">
+        <createTable tableName="vacancy">
+            <column name="id" type="text">
                 <constraints primaryKey="true"/>
             </column>
             <column name="vacancy_data" type="CLOB"/>

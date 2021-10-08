@@ -4,14 +4,14 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="create-table-resume" author="KhakinVA">
+    <changeSet id="create-table-resume-v2" author="KhakinVA">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="RESUME"/>
+                <tableExists tableName="resume"/>
             </not>
         </preConditions>
-        <createTable tableName="RESUME">
-            <column name="id" type="VARCHAR2(64 char)">
+        <createTable tableName="resume">
+            <column name="id" type="text">
                 <constraints primaryKey="true"/>
             </column>
             <column name="resume_data" type="CLOB"/>

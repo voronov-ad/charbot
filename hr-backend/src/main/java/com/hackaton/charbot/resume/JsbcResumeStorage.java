@@ -1,7 +1,6 @@
 package com.hackaton.charbot.resume;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hackaton.charbot.vacancy.Vacancy;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,7 +28,8 @@ public class JsbcResumeStorage implements ResumeStorage {
         in.addValue("id", resume.getId());
         in.addValue("resume_data", new SqlLobValue(objectMapper.writeValueAsString(resume),
                 new DefaultLobHandler()), Types.CLOB);
-        jdbcTempalte.update("merge into resume key(id) values (:id, :resume_data)", in);
+        jdbcTempalte.update("insert into resume(id, resume_data) values (:id, :resume_data) " +
+                "on conflict(id) do update set resume_data = excluded.resume_data", in);
     }
 
     @SneakyThrows

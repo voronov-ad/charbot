@@ -28,7 +28,8 @@ public class JdbcVacancyStorage implements VacancyStorage {
         in.addValue("id", vacancy.getId());
         in.addValue("vacancy_data", new SqlLobValue(objectMapper.writeValueAsString(vacancy),
                 new DefaultLobHandler()), Types.CLOB);
-        jdbcTempalte.update("merge into vacancy key (id) values (:id, :vacancy_data)", in);
+        jdbcTempalte.update("insert into vacancy(id, vacancy_data) values (:id, :vacancy_data) on conflict(id) " +
+                "do update set vacancy_data = excluded.vacancy_data", in);
     }
 
     @SneakyThrows

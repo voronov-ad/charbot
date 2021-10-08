@@ -2,11 +2,13 @@ version: "3.9"
 services:
 
   backend:
-    image: sudohackin/hr-backend:latest
+    image: hr-backend:1.0.2-SNAPSHOT
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hr
+      SPRING_DATASOURCE_USERNAME: "hr-hackaton"
+      SPRING_DATASOURCE_PASSWORD: "hr-hackaton-pass"
     ports:
       - "8060:9090"
-    volumes:
-      - db:/database/
   resume-searcher:
     image: sudohackin/hr-resume-parser:latest
     ports:
@@ -15,5 +17,24 @@ services:
     image: sudohackin/hr-vacancy-parser:latest
     ports:
       - "8070:5000"
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "hr"
+      POSTGRES_USER: "hr-hackaton"
+      POSTGRES_PASSWORD: "hr-hackaton-pass"
+    ports:
+      - "5432:5432"
+    volumes:
+      - database_data:/var/lib/postgresql/data
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "hr-hackaton@mail.ru"
+      PGADMIN_DEFAULT_PASSWORD: "hr-hackaton-pass"
+    ports:
+      - "5050:80"
 volumes:
+  database_data:
   db:

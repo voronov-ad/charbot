@@ -13,7 +13,7 @@ POST http://localhost:8060/api/v1/feedback
 Content-Type: application/json
 
 {
-  "url_vacancy": "hht8.ru",
+  "url_vacancy": "hht9.ru",
   "url_candidate": "hhr.ru",
   "label": 1
 }
