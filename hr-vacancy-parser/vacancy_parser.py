@@ -45,20 +45,20 @@ def get_proxies():
     return proxies
 
 
-def invokeWithProxy(url):
-    proxies = get_proxies()
-    proxy_pool = cycle(proxies)
-    # Get a proxy from the pool
-    proxy = next(proxy_pool)
-    while True:
-        try:
-            return requests.get(url, headers=headers, proxies={"http://": proxy, "https://": proxy})
-        except Exception as e:
-            print(e)
-            # Most free proxies will often get connection errors. You will have retry the entire request using another proxy to work.
-            # We will just skip retries as its beyond the scope of this tutorial and we are only downloading a single url
-            print("Skipping. Connnection error")
-            proxy = next(proxy_pool)
+# def invokeWithProxy(url):
+#     proxies = get_proxies()
+#     proxy_pool = cycle(proxies)
+#     # Get a proxy from the pool
+#     proxy = next(proxy_pool)
+#     while True:
+#         try:
+#             return requests.get(url, headers=headers, proxies={"http://": proxy, "https://": proxy})
+#         except Exception as e:
+#             print(e)
+#             # Most free proxies will often get connection errors. You will have retry the entire request using another proxy to work.
+#             # We will just skip retries as its beyond the scope of this tutorial and we are only downloading a single url
+#             print("Skipping. Connnection error")
+#             proxy = next(proxy_pool)
 
 
 @dataclass
@@ -97,8 +97,8 @@ def parse_vacancy(id):
 
 def parse_vacancy_internal(link):
     # link = "https://hh.ru/vacancy/48502563?from=vacancy_search_list&query=java"
-    resumePage = invokeWithProxy(link)
-    # resumePage = requests.get(link, headers=headers)
+    # resumePage = invokeWithProxy(link)
+    resumePage = requests.get(link, headers=headers)
 
     parsedPage = BeautifulSoup(resumePage.content, "html.parser")
     companyName = saveSearch(lambda: parsedPage.find("a", class_='vacancy-company-name').find("span"))
@@ -141,8 +141,8 @@ def main():
             print(f"page {page_num}")
             URL = f"https://hh.ru/search/vacancy?text=Руководитель&page={page_num}"
 
-            page = invokeWithProxy(URL)
-            # page = requests.get(URL, headers=headers)
+            # page = invokeWithProxy(URL)
+            page = requests.get(URL, headers=headers)
 
             soup = BeautifulSoup(page.content, "html.parser")
             # print(soup.prettify())

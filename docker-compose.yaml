@@ -14,7 +14,7 @@ services:
     ports:
       - "8090:5000"
   vacancy-searcher:
-    image: sudohackin/hr-vacancy-parser:latest
+    image: sudohackin/hr-vacancy-parser:1.0.1
     ports:
       - "8070:5000"
   company-searcher:
