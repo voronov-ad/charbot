@@ -40,5 +40,6 @@ theme: /
                 go!: /Подбор/ОсновнойПоток/Город
 
         state: Конец
+            a: Спасибо за скриннинг! Мы с Вами обязательно свяжемся!
             script:
-                $jsapi.log(JSON.stringify($session.step));
+                $client.questions = $session.step)
