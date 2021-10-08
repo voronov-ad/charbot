@@ -9,5 +9,5 @@ public interface VacancyStorage {
 
     Optional<Vacancy> findById(String id);
 
-    List<Vacancy> findAll();
+    List<String> findAllIds();
 }

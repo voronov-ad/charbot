@@ -13,5 +13,5 @@ public interface ResumeStorage {
 
     Optional<Resume> findById(String id);
 
-    List<Resume> findAll();
+    List<String> findAllIds();
 }

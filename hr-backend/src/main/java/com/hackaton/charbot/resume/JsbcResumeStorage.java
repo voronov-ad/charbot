@@ -48,7 +48,7 @@ public class JsbcResumeStorage implements ResumeStorage {
     }
 
     @Override
-    public List<Resume> findAll() {
-        return null;
+    public List<String> findAllIds() {
+        return jdbcTempalte.getJdbcOperations().queryForList("select id from resume", String.class);
     }
 }

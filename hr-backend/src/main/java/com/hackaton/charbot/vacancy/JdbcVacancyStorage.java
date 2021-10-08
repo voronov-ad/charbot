@@ -47,7 +47,7 @@ public class JdbcVacancyStorage implements VacancyStorage {
     }
 
     @Override
-    public List<Vacancy> findAll() {
-        return null;
+    public List<String> findAllIds() {
+        return jdbcTempalte.getJdbcOperations().queryForList("select id from vacancy", String.class);
     }
 }

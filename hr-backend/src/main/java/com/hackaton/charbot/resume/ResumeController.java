@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.websocket.server.PathParam;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/resume")
@@ -21,5 +21,10 @@ public class ResumeController {
     Resume getById(@PathVariable String id) {
         return storage.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "Resume not found by id" + id));
+    }
+
+    @GetMapping
+    List<String> getAllIds() {
+        return storage.findAllIds();
     }
 }

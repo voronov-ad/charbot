@@ -5,8 +5,14 @@ Content-Type: application/json
 ### vacancy by id
 GET http://localhost:8060/api/v1/vacancy/48565881
 
+### all vacancies
+GET http://localhost:8060/api/v1/vacancy
+
 ### resume by id
 GET http://localhost:8060/api/v1/resume/8bcc9ce2000832a0890039ed1f6c45696f7472
+
+### all resumes
+GET http://localhost:8060/api/v1/resume
 
 ### register feedback
 POST http://localhost:8060/api/v1/feedback
