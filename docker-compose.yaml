@@ -2,7 +2,7 @@ version: "3.9"
 services:
 
   backend:
-    image: sudohackin/hr-backend:1.0.2
+    image: hr-backend:1.0.3-SNAPSHOT
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hr
       SPRING_DATASOURCE_USERNAME: "hr-hackaton"
@@ -17,6 +17,10 @@ services:
     image: sudohackin/hr-vacancy-parser:latest
     ports:
       - "8070:5000"
+  company-searcher:
+    image: sudohackin/hr-company-parser:latest
+    ports:
+      - "8080:5000"
   postgres:
     image: postgres:latest
     environment:

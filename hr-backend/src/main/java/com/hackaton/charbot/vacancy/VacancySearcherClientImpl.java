@@ -28,7 +28,18 @@ public class VacancySearcherClientImpl implements VacancySearcherClient {
         map.put("id", id);
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
         Vacancy vacancy = restTemplate.postForObject("http://vacancy-searcher:5000/vacancy", entity, Vacancy.class);
+        Company companyInfo = findCompanyInfo(vacancy.getCompanyName());
         vacancy.setId(id);
+        vacancy.setCompany(companyInfo);
         return vacancy;
+    }
+
+    private Company findCompanyInfo(String companyName) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", companyName);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
+        return restTemplate.postForObject("http://company-searcher:5000/company", entity, Company.class);
     }
 }

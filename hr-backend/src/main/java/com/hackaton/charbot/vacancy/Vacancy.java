@@ -15,4 +15,5 @@ public class Vacancy {
     String link;
     String salary;
     List<String> tags;
+    Company company;
 }
