@@ -16,20 +16,19 @@ bot.
 from json import dumps
 
 from requests import post
-from telegram import Update, ForceReply, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
 
-# Enable logging
-from ide import IDEIntegration, IDEtoTelegramResponseMapper
-from learning import reply_learning_data, send_learning_data, get_learning_data, learning_replies
-from logger import get_logger
-from mode import Mode
-from post_process import new_post_process
-
+from utils.ide import IDEIntegration, IDEtoTelegramResponseMapper
+from utils.learning import reply_learning_data, send_learning_data, get_learning_data, learning_replies
+from utils.logger import get_logger
+from utils.mode import Mode
+from utils.post_process import new_post_process
+from utils.config import MANAGER_SCENARIO_WEBHOOK, RESUME_SCENARIO_WEBHOOK, SCREENING_SCENARIO_WEBHOOK, SUGGEST_PATH
 logger = get_logger(__name__)
-ide_manager = IDEIntegration("https://smartapp-code.sberdevices.ru/chatadapter/chatapi/webhook/sber_nlp2/YVQzMyZP:2ba00f91b1388ba5f4ce8f9b4533d23299ee4a67")
-ide_resume = IDEIntegration("https://smartapp-code.sberdevices.ru/chatadapter/chatapi/webhook/sber_nlp2/aDiuLgne:a284b64c225020ceee53f7834eeb909e43891e0f")
-ide_screening = IDEIntegration("https://smartapp-code.sberdevices.ru/chatadapter/chatapi/webhook/sber_nlp2/TtqWopAl:518003018d2fd748c329106d5a4f7e2a45970f4a")
+ide_manager = IDEIntegration(MANAGER_SCENARIO_WEBHOOK)
+ide_resume = IDEIntegration(RESUME_SCENARIO_WEBHOOK)
+ide_screening = IDEIntegration(SCREENING_SCENARIO_WEBHOOK)
 ide_response_mapper = IDEtoTelegramResponseMapper()
 
 IDEs = {
@@ -43,11 +42,8 @@ IDEs = {
 # context.
 def send_event(event, update: Update, context: CallbackContext):
     mode = context.user_data.get("mode", None)
-    logger.info(mode)
     if mode in IDEs:
-        logger.info(mode)
         ide = IDEs[mode]
-        logger.info(ide_response_mapper)
         response = ide.send_event(
             mid=update.update_id,
             uid=update.message.from_user.username,
@@ -73,8 +69,9 @@ def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     user = update.effective_user
     update.message.reply_markdown_v2(
-        fr'Привет {user.mention_markdown_v2()}\! Я твой личный помощник по поиску кандидатов :\) '
-        fr'Воспользуйся командой /new, чтобы начать поиск\!',
+        fr'Привет {user.mention_markdown_v2()}\! Я ваш личный помощник по поиску кандидатов :\) '
+        fr'Чтобы узнать основные возможности, восполуьзуйтесь командой /help\.'
+        fr'Или оспользуйся командой /new, чтобы начать поиск\!',
         reply_markup=ForceReply(selective=True),
     )
 
@@ -171,16 +168,14 @@ def message_handler(update: Update, context: CallbackContext) -> None:
 def button(update: Update, context: CallbackContext) -> None:
     """Parses the CallbackQuery and updates the message text."""
     query = update.callback_query
-    logger.info(update)
     mode = context.user_data.get("mode", None)
 
     query.answer()
     if mode == Mode.LEARNING:
         query.edit_message_text(f"{learning_replies[update.callback_query.data]} " + query.message.text)
-        logger.info(update)
         vacancy_id = context.user_data.get("vacancy_id", None)
         resume_list = context.user_data.get("resume_list", None)
-        logger.info(resume_list)
+
         resume = resume_list[-1]
         send_learning_data(update.callback_query.data, vacancy_id, resume)
 
@@ -219,7 +214,7 @@ def run_learning(update: Update, context: CallbackContext) -> None:
 
 def stop(update: Update, context: CallbackContext) -> None:
     """ Запустить обучение. """
-    mode = context.user_data["mode"]
+    mode = context.user_data.get("mode", None)
     context.user_data["mode"] = None
     update.message.reply_text("Процесс обучения завершён.")
 
@@ -228,7 +223,7 @@ def stop(update: Update, context: CallbackContext) -> None:
             'Content-type': 'application/json',
             'Accept': '*/*'
         }
-        data = post("http://192.168.1.149:8001/suggest", data=dumps(context.user_data["dataLoad"]), headers=headers)
+        data = post(SUGGEST_PATH, data=dumps(context.user_data["dataLoad"]), headers=headers)
         # data = get_learning_data(context.user_data["vacancy_id"])
         update.message.reply_text(f"Тебе лучше всего подойдут кандидаты: {data.json()['result'][:10]}")
 

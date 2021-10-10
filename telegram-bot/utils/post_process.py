@@ -1,9 +1,10 @@
 from requests import post
 from json import dumps
 
-from learning import reply_learning_data
-from logger import get_logger
-from mode import Mode
+from .learning import reply_learning_data
+from .logger import get_logger
+from .mode import Mode
+from .config import SUGGEST_PATH
 
 logger = get_logger(__name__)
 
@@ -13,7 +14,7 @@ def new_post_process(data, message, context):
         'Content-type': 'application/json',
         'Accept': '*/*'
     }
-    result = post("http://192.168.1.149:8001/suggest", data=dumps(data), headers=headers)
+    result = post(SUGGEST_PATH, data=dumps(data), headers=headers)
     context.user_data["resume_list"] = result.json()["result"][::-1]
     context.user_data["vacancy_id"] = result.json()["vacancy"] or "12345"
     context.user_data["dataLoad"] = data

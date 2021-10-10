@@ -1,7 +1,9 @@
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-from logger import get_logger
-from requests import post, get
 from json import dumps
+from requests import post, get
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+
+from .logger import get_logger
+from .config import BACKEND_PATH
 
 logger = get_logger(__name__)
 learning_replies = {
@@ -18,8 +20,7 @@ def reply_learning_data(vacancy_id, resume, message, context):
 
 
 def get_learning_data(vacancy_id):
-    data = get(f'http://localhost:8060/api/related-vacancy?id={vacancy_id}')
-    logger.info(data)
+    data = get(f'{BACKEND_PATH}/api/related-vacancy?id={vacancy_id}')
     return data.json()
 
 
@@ -33,5 +34,5 @@ def send_learning_data(vote, vacancy_id, resume):
         'Content-type': 'application/json',
         'Accept': '*/*'
     }
-    result = post("http://localhost:8060/api/v1/feedback", data=dumps(data), headers=headers)
+    result = post(f"{BACKEND_PATH}/api/v1/feedback", data=dumps(data), headers=headers)
     logger.info(f"Send feedback result: {result.status_code}")

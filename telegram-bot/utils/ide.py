@@ -1,9 +1,8 @@
 import json
-
 import requests
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 
-from logger import get_logger
+from .logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -50,8 +49,8 @@ class IDEIntegration:
             'Content-type': 'application/json',
             'Accept': '*/*'
         }
-        logger.debug(f"Send: {message}")
-        logger.info(self.webhook)
+        logger.debug(f"Send: {message} to {self.webhook}")
+
         return requests.post(
             self.webhook,
             data=json.dumps(message),
@@ -60,12 +59,12 @@ class IDEIntegration:
 
     def send_text(self, mid, uid, text):
         response = self._send(self.create_text_message(mid, uid, text))
-        logger.debug(f"Response: {response.text}")
+        logger.debug(f"Response on text: {response.text}")
         return response.json()
 
     def send_event(self, mid, uid, event):
         response = self._send(self.create_event_message(mid, uid, event))
-        logger.debug(f"Response: {response.text}")
+        logger.debug(f"Response on event: {response.text}")
         return response.json()
 
 
@@ -92,7 +91,6 @@ class IDEtoTelegramResponseMapper:
 
         if line:
             keyboard.append(line)
-        logger.info(line)
 
         return keyboard
 
@@ -111,7 +109,7 @@ class IDEtoTelegramResponseMapper:
         payload = message.get("payload", {})
         suggestions = payload.get("suggestions", {}).get("buttons", [])
         keyboard = self._build_keyboard(suggestions)
-        logger.info(f"Keyboard: {keyboard}")
+
         reply_markup = InlineKeyboardMarkup(keyboard)
         items = payload.get("items", [])
 
@@ -120,7 +118,6 @@ class IDEtoTelegramResponseMapper:
         elif not items:
             self._reply(reply, "", reply_markup)
             return
-        logger.info(items[:-1])
         for item in items[:-1]:
             text = self._get_text(item)
             if text:
@@ -134,7 +131,6 @@ class IDEtoTelegramResponseMapper:
         payload = message.get("payload", {})
         suggestions = payload.get("suggestions", {}).get("buttons", [])
         keyboard = self._build_keyboard(suggestions)
-        logger.info(f"Keyboard: {keyboard}")
         reply_markup = InlineKeyboardMarkup(keyboard)
         items = payload.get("items", [])
 

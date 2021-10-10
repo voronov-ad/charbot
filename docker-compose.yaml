@@ -39,6 +39,13 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "hr-hackaton-pass"
     ports:
       - "5050:80"
+  bot:
+    container_name: bot_container
+    build: telegram-bot
+    environment:
+      BACKEND_PATH: "http://127.0.0.1:8060"
+      SUGGEST_PATH: "http://127.0.0.1:8080/suggest"
+      LOGGING_LEVEL: "INFO"
 volumes:
   database_data:
   db:
