@@ -8,6 +8,7 @@ import random
 from typing import List, Dict, Any
 import yaml
 import pandas as pd
+from decouple import config as dconfig
 
 PREDICT_LABEL = "label"
 
@@ -28,8 +29,13 @@ class RankModelConfig(BaseModel):
 
     @classmethod
     def from_yaml(cls, path: str):
-        with open(path, "r") as reader:
-            return cls(**yaml.safe_load(reader))
+        try:
+            with open(path, "r") as reader:
+                return cls(**yaml.safe_load(reader))
+        except FileNotFoundError:
+            return cls(
+                model_path=dconfig("MODEL_PATH", default="data/catboost.cbm")
+            )
 
 
 class RankModel:

@@ -4,6 +4,9 @@ from typing import Union, List, Optional
 from base.schemas import Resume, Vacancy, Feedback
 from asyncio import BoundedSemaphore
 import yaml
+from decouple import config as dconfig
+
+TIMEOUT = 10
 
 
 class BackendAdapterConfig(BaseModel):
@@ -38,13 +41,18 @@ class BackendAdapter:
 
     @classmethod
     def from_yaml(cls, path: str):
-        with open(path, "r") as reader:
-            return cls(BackendAdapterConfig(**yaml.safe_load(reader)))
+        try:
+            with open(path, "r") as reader:
+                return cls(BackendAdapterConfig(**yaml.safe_load(reader)))
+        except FileNotFoundError:
+            cls(BackendAdapterConfig(
+                address=dconfig("BACKEND_ADDRESS", default="backend", cast=str)
+            ))
 
     async def hh_resume_search(self, title: str):
         async with self._client.post(
                 url=self.RESUME_SEARCH.format(address=self._config.address), json={"title": title},
-                ssl=False) as resp:
+                ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return [Resume(**resp_item) for resp_item in await resp.json()]
             else:
@@ -53,7 +61,7 @@ class BackendAdapter:
     async def hh_resume_get(self, ids: str):
         async with self._client.post(
                 url=self.RESUME_GET.format(address=self._config.address), json={"id": ids},
-                ssl=False) as resp:
+                ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return Resume(**await resp.json())
             else:
@@ -62,7 +70,7 @@ class BackendAdapter:
     async def hh_vacancy_get(self, ids: str):
         async with self._client.post(
                 url=self.VACANCY_GET.format(address=self._config.address), json={"id": ids},
-                ssl=False) as resp:
+                ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return Vacancy(**await resp.json())
             else:
@@ -70,7 +78,7 @@ class BackendAdapter:
 
     async def hh_vacancy_to_resume(self, ids: str):
         async with self._client.get(
-                url=self.FEEDBACK_SEND.format(address=self._config.address, id=ids), ssl=False) as resp:
+                url=self.FEEDBACK_SEND.format(address=self._config.address, id=ids), ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return Resume(**await resp.json())
 
@@ -86,7 +94,7 @@ class BackendAdapter:
 
     async def feedback_all(self) -> Optional[List[Feedback]]:
         async with self._client.get(
-                url=self.FEEDBACK_GET_ALL.format(address=self._config.address), ssl=False) as resp:
+                url=self.FEEDBACK_GET_ALL.format(address=self._config.address), ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return Feedback.from_list_dict(await resp.json())
             else:
@@ -94,7 +102,7 @@ class BackendAdapter:
 
     async def vacancy_all(self):
         async with self._client.get(
-                url=self.VACANCY_ALL.format(address=self._config.address), ssl=False) as resp:
+                url=self.VACANCY_ALL.format(address=self._config.address), ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return await resp.json()
             else:
@@ -102,7 +110,7 @@ class BackendAdapter:
 
     async def resume_all(self):
         async with self._client.get(
-                url=self.RESUME_ALL.format(address=self._config.address), ssl=False) as resp:
+                url=self.RESUME_ALL.format(address=self._config.address), ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return await resp.json()
             else:
@@ -110,7 +118,7 @@ class BackendAdapter:
 
     async def vacancy_by_id(self, ids: str):
         async with self._client.get(
-                url=self.VACANCY_BY_ID.format(address=self._config.address, id=ids), ssl=False) as resp:
+                url=self.VACANCY_BY_ID.format(address=self._config.address, id=ids), ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return Vacancy(**await resp.json())
             else:
@@ -118,7 +126,7 @@ class BackendAdapter:
 
     async def resume_by_id(self, ids: str):
         async with self._client.get(
-                url=self.RESUME_BY_ID.format(address=self._config.address, id=ids), ssl=False) as resp:
+                url=self.RESUME_BY_ID.format(address=self._config.address, id=ids), ssl=False, timeout=TIMEOUT) as resp:
             if resp.status == 200:
                 return Resume(**await resp.json())
             else:

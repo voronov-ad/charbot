@@ -6,6 +6,8 @@ from base.predictor import RankModel, PREDICT_LABEL
 from base.cache import FastLRUCache
 from decouple import config
 from base.schemas import get_dataset
+from asyncio import TimeoutError
+from aiohttp.client_exceptions import ClientConnectorError
 import asyncio
 import pandas as pd
 from tqdm import tqdm
@@ -26,11 +28,19 @@ cache_resume = FastLRUCache(CACHE_SIZE)
 ranker = RankModel.from_yaml(MODEL_CONFIG_PATH)
 adapter = BackendAdapter.from_yaml(ADAPTER_CONFIG_PATH)
 
+
+
 async def train_model():
     while True:
+        # log.info(f"Application will sleep for {SLEEP_SECONDS} seconds")
+        # await asyncio.sleep(SLEEP_SECONDS)
         log.info(f"Initializing training loop")
         log.info(f"Initializing Collecting feedbacks")
-        feedback_list = await adapter.feedback_all()
+        try:
+            feedback_list = await adapter.feedback_all()
+        except (TimeoutError, ClientConnectorError) as ex:
+            log.warning("Connection error, going back to the loop")
+            continue
         log.info(f"Collected {len(feedback_list)} feedbacks")
         train_resume = []
         train_vacancy = []
@@ -67,8 +77,6 @@ async def train_model():
         log.info(f"Model trained! Saving")
         ranker.save_file()
         log.info(f"Model Saved")
-        log.info(f"Application will sleep for {SLEEP_SECONDS} seconds")
-        await asyncio.sleep(SLEEP_SECONDS)
 
 
 def main():

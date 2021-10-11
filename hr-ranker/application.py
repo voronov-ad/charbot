@@ -7,7 +7,10 @@ from base.predictor import RankModel
 from decouple import config
 from uvicorn import run as uv_run
 from tqdm import tqdm
-
+from aiohttp.client_exceptions import ClientConnectorError
+from asyncio import TimeoutError
+import logging
+log = logging.getLogger(__name__)
 
 MODEL_CONFIG_PATH = config("MODEL_CONFIG_PATH", default="./configs/ranker_config.yml", cast=str)
 ADAPTER_CONFIG_PATH = config("MODEL_CONFIG_PATH", default="./configs/adapter_config.yml", cast=str)
@@ -16,21 +19,25 @@ SUGGEST_ENDPOINT = config("SUGGEST_ENDPOINT", default="/suggest", cast=str)
 CACHE_SIZE = config("CACHE_SIZE", default=1000, cast=int)
 HOST = config("HOST", default="0.0.0.0", cast=str)
 PORT = config("PORT", default=8001, cast=int)
-LOG_LEVEL = config("LOG_LEVEL", default="trace", cast=lambda x: str(x).lower())
+LOG_LEVEL = config("LOG_LEVEL", default="debug", cast=lambda x: str(x).lower())
 WORKERS = config("WORKERS", default=1, cast=int)
 
 app = FastAPI()
 
+log.setLevel(LOG_LEVEL.upper())
 vacancy_cache = FastLRUCache(max_size=CACHE_SIZE)
 ranker = RankModel.from_yaml(MODEL_CONFIG_PATH)
 adapter = BackendAdapter.from_yaml(ADAPTER_CONFIG_PATH)
 
 
-@app.on_event("startup")
-async def prepare_adapter():
-    load_ids = await adapter.resume_all()
-    ranker.save_resume_cache([await adapter.resume_by_id(ids) or
-                              await adapter.hh_resume_get(ids) for ids in tqdm(load_ids)])
+# @app.on_event("startup")
+# async def prepare_adapter():
+#     try:
+#         load_ids = await adapter.resume_all()
+#         ranker.save_resume_cache([await adapter.resume_by_id(ids) or
+#                                   await adapter.hh_resume_get(ids) for ids in tqdm(load_ids)])
+#     except (TimeoutError, ClientConnectorError) as ex:
+#         log.warning("APPLICATION STARTED WITH NO DATA IN CACHE!")
 
 
 @app.post(SUGGEST_ENDPOINT)

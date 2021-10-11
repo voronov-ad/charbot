@@ -58,3 +58,4 @@ uvloop==0.16.0
 watchgod==0.7
 websockets==10.0
 yarl==1.7.0
+gunicorn

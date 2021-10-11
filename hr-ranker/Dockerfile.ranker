@@ -12,12 +12,15 @@ ENV PYTHONUNBUFFERED=1 \
     TIMEOUT_KEEP_ALIVE=5 \
     HOST=0.0.0.0 \
     SSL_REQ=2 \
-    PORT=8001
+    PORT=8001 \
+    LOG_LEVEL=INFO
 
 EXPOSE ${PORT}
-RUN mkdir -p /app
-COPY ./* /app/
+RUN mkdir /app
+COPY . /app/
 
 WORKDIR /app
-RUN pip install -r ./requirements.txt
+RUN ls -la
+RUN pip install -r ./requiremens.txt
+RUN python init_stemmer.py
 CMD sh run.sh

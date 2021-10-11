@@ -1,8 +1,11 @@
 version: "3.9"
 services:
-
   backend:
+    container_name: backend
+    restart: always
     image: sudohackin/hr-backend:1.0.8
+    depends_on:
+      - postgres
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hr
       SPRING_DATASOURCE_USERNAME: "hr-hackaton"
@@ -10,19 +13,33 @@ services:
     ports:
       - "8060:9090"
   resume-searcher:
+    container_name: resume-searcher
+    depends_on:
+      - postgres
+    restart: always
     image: sudohackin/hr-resume-parser:latest
     ports:
       - "8090:5000"
   vacancy-searcher:
+    container_name: vacancy-searcher
+    depends_on:
+      - postgres
+    restart: always
     image: sudohackin/hr-vacancy-parser:1.0.1
     ports:
       - "8070:5000"
   company-searcher:
+    container_name: company-searcher
+    depends_on:
+      - postgres
+    restart: always
     image: sudohackin/hr-company-parser:latest
     ports:
       - "8080:5000"
   postgres:
     image: postgres:latest
+    container_name: postgres
+    restart: always
     environment:
       POSTGRES_DB: "hr"
       POSTGRES_USER: "hr-hackaton"
@@ -32,7 +49,10 @@ services:
     volumes:
       - database_data:/var/lib/postgresql/data
   pgadmin:
-    container_name: pgadmin_container
+    depends_on:
+      - postgres
+    container_name: pgadmin
+    restart: always
     image: dpage/pgadmin4:latest
     environment:
       PGADMIN_DEFAULT_EMAIL: "hr-hackaton@mail.ru"
@@ -40,12 +60,52 @@ services:
     ports:
       - "5050:80"
   bot:
-    container_name: bot_container
+    container_name: bot
+    depends_on:
+      - backend
+      - ranker
+    restart: always
     build: telegram-bot
     environment:
-      BACKEND_PATH: "http://127.0.0.1:8060"
-      SUGGEST_PATH: "http://127.0.0.1:8080/suggest"
+      BACKEND_PATH: http://backend:8060
+      SUGGEST_PATH: http://ranker:8081/suggest
       LOGGING_LEVEL: "INFO"
+  ranker:
+    depends_on:
+      - backend
+    container_name: ranker
+    image: voronovad/hr-ranker:latest
+    restart: always
+    environment:
+      MODEL_CONFIG_PATH: /data/ranker_config.yml
+      ADAPTER_CONFIG_PATH: /data/adapter_config.yml
+      MODEL_ENDPOINT: /rank
+      SUGGEST_ENDPOINT: "/suggest"
+      CACHE_SIZE: "1000"
+      HOST: "0.0.0.0"
+      PORT: "8081"
+      MODEL_PATH: /data/catboost.cbm
+      BACKEND_ADDRESS: backend
+    ports:
+      - "8081:8081"
+    volumes:
+      - model:/data
+  updater:
+    container_name: hr-updater
+    depends_on:
+      - backend
+    image: voronovad/hr-updater:latest
+    environment:
+      MODEL_CONFIG_PATH: /data/ranker_config.yml
+      ADAPTER_CONFIG_PATH: /data/adapter_config.yml
+      SLEEP_SECONDS: 10
+      LOG_LEVEL: DEBUG
+      CACHE_SIZE: 10000
+      MODEL_PATH: /data/catboost.cbm
+      BACKEND_ADDRESS: backend
+    volumes:
+      - model:/data
 volumes:
   database_data:
   db:
+  model:
